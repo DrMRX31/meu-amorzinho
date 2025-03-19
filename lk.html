@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu mundo ♥</title>
+    <style>
+        body {
+            background-color: #ffcccc;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff3366;
+        }
+
+        .heart {
+            font-size: 50px;
+            color: #ff3366;
+            cursor: pointer;
+        }
+
+        #nao {
+            font-size: 24px;
+            color: #333;
+            background-color: #ffcccc;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+        }
+
+           /* caixa de texto */
+           .texto-menor {
+            width: 800px; /* Defina a largura desejada */
+            margin: 0 auto; /* Centraliza o bloco */
+            text-align: justify; /* Justifica o texto */
+        }
+
+
+        /* vídeo */
+        iframe {
+            margin-top: 50px;
+            width: 320px;  
+            height: 180px; 
+            border: none;
+        }
+
+        /* Controle de volume */
+        .volume-control {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Láisa Kalline</h1>
+        <p>Olá, meu amorzinho! ❤️,</p>
+        <p class="texto-menor">Ultimamente, tenho pensado sobre nós e sobre como quero que seja meu futuro e descobri que te quero nele. Descobri também que me arrependeria pelo resto da vida se não te fizesse minha, por que meu coração me fala toda hora que você é a pessoa certa pra mim! E sendo assim...</p>
+        <p>Você aceita namorar comigo?</p>
+        <p class="heart" onclick="mostrarResposta()">❤️</p>
+        <button id="nao" onmouseover="mudarPosicao()">Não</button>
+        <p id="resposta" style="display: none;"></p>
+    </div>
+
+    <!-- YouTube -->
+    <div id="player"></div>
+
+    <!-- volume -->
+    <div class="volume-control">
+        <label for="volume-slider">Controle de Volume:</label>
+        <input type="range" id="volume-slider" min="0" max="100" value="100" onchange="setVolume(this.value)">
+    </div>
+
+    <script>
+        // Variáveis
+        let player;
+
+        // API do YouTube
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '180',
+                width: '320',
+                videoId: 'f9Ui6Bjvx_8', // ID do vídeo
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'rel': 0,
+                    'showinfo': 0,
+                    'modestbranding': 1,
+                    'iv_load_policy': 3
+                }
+            });
+        }
+
+        // Função volume
+        function setVolume(volume) {
+            if (player) {
+                player.setVolume(volume); // Ajusta o volume com base no valor do slider
+            }
+        }
+
+        function mostrarResposta() {
+            document.getElementById('resposta').style.display = 'block';
+            document.getElementById('resposta').innerHTML = 'Você será a pessoa mais amada do mundo! ❤️';
+        }
+
+        function mudarPosicao() {
+            const buttonNao = document.getElementById('nao');
+            const randomX = Math.floor(Math.random() * window.innerWidth);
+            const randomY = Math.floor(Math.random() * window.innerHeight);
+            buttonNao.style.left = `${randomX}px`;
+            buttonNao.style.top = `${randomY}px`;
+        }
+
+        // Carregar a API do YouTube
+        let tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        let firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
+</body>
+</html>
